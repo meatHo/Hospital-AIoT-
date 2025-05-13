@@ -358,14 +358,14 @@ public class HospitalMain {
         // e.printStackTrace();
         // }
 
-        NormalSession = JCSMPFactory.onlyInstance().createSession(properties1);
+        EmergencySession = JCSMPFactory.onlyInstance().createSession(properties1);
 
         final ConsumerFlowProperties flow_prop2 = new ConsumerFlowProperties();
         flow_prop2.setEndpoint(EmergencyQueue);
         flow_prop2.setAckMode(JCSMPProperties.SUPPORTED_MESSAGE_ACK_CLIENT);
         EndpointProperties endpoint_props2 = new EndpointProperties();
         endpoint_props2.setAccessType(EndpointProperties.ACCESSTYPE_NONEXCLUSIVE);
-        cons2 = NormalSession.createFlow(new XMLMessageListener() {
+        cons2 = EmergencySession.createFlow(new XMLMessageListener() {
             public void onReceive(BytesXMLMessage msg) {
                 System.out.println("메시지 수신: " + msg.dump());
                 if (msg != null) {// String getDestination();이게 토픽 이름 반환하는거임
